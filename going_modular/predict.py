@@ -17,6 +17,11 @@ parser.add_argument("--model_path",
                     type=str,
                     help="target model to use for prediction filepath")
 
+parser.add_argument("--hidden_units",
+                    default=10,
+                    type=int,
+                    help="Hidden units of our trained model")
+
 args = parser.parse_args()
 
 # Setup class names
@@ -33,7 +38,7 @@ print(f"[INFO] Predicting on {IMG_PATH}")
 def load_model(filepath=args.model_path):
   # Need to use same hyperparameters as saved model 
   model = model_builder.TinyVGG(input_shape=3,
-                                hidden_units=10,
+                                hidden_units=args.hidden_units,
                                 output_shape=3).to(device)
 
   print(f"[INFO] Loading in model from: {filepath}")

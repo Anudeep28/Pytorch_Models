@@ -15,6 +15,7 @@ class TinyVGG(nn.Module):
     hidden_units: An integer indicating number of hidden units between layers.
     output_shape: An integer indicating number of output units.
   """
+  # Note: "Need to make it more dynamic in terms of changes in the hidden unit"
   def __init__(self, input_shape: int, hidden_units: int, output_shape: int) -> None:
       super().__init__()
       self.conv_block_1 = nn.Sequential(
