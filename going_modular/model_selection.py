@@ -1,19 +1,19 @@
-
 # Let us now functionize the model selection
 import torchvision
 from torch import nn
 
 def create_model(model_name: str,
-                 out_features: int=3):
+                 out_features: int=3,
+                 device: str=device):
     assert model_name == "effnetb2" or model_name == "effnetv2_s", "Model name should be effnetb2 or effnetv2_s"
     if model_name == "effnetb2":
         weights = torchvision.models.EfficientNet_B2_Weights.DEFAULT
-        model = torchvision.models.efficientnet_b2(weights=weights)
+        model = torchvision.models.efficientnet_b2(weights=weights).to(device)
         dropout = 0.3
         in_features = 1408
     elif model_name == "effnetv2_s":
         weights = torchvision.models.EfficientNet_V2_S_Weights.DEFAULT
-        model = torchvision.models.efficientnet_v2_s(weights=weights)
+        model = torchvision.models.efficientnet_v2_s(weights=weights).to(device)
         dropout = 0.2
         in_features = 1280
 
@@ -25,7 +25,7 @@ def create_model(model_name: str,
     model.classifier = nn.Sequential(
         nn.Dropout(p=dropout, inplace=True),
         nn.Linear(in_features=in_features,out_features=out_features)
-    )
+    ).to(device)
 
     # set the model name
     model.name = model_name
