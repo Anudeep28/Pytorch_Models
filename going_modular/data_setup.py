@@ -14,7 +14,7 @@ def create_dataloaders(
     test_dir: str, 
     transform: transforms.Compose, 
     batch_size: int, 
-    num_workers: int=1#NUM_WORKERS
+    num_workers: int=NUM_WORKERS
 ):
   """Creates training and testing DataLoaders.
 
