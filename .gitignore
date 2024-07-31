@@ -162,3 +162,9 @@ cython_debug/
 
 # Datasets
 data/
+
+# Models
+Models/
+
+# runs
+runs/
