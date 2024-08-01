@@ -39,9 +39,9 @@ class PatchEmbedding(nn.Module):
         
         # Perform the forward pass
         x_patched = self.patcher(x)
-        print(f"Shape after patcher layer: {x_patched.shape}")
+        #print(f"Shape after patcher layer: {x_patched.shape}")
         x_flattened = self.flatten(x_patched)
-        print(f"Shape after flatten layer: {x_flattened.shape}")
+        #print(f"Shape after flatten layer: {x_flattened.shape}")
         # 6. Make sure the output shape has the right order 
         return x_flattened.permute(0, 2, 1) # adjust so the embedding is on the final dimension [batch_size, P^2•C, N] -> [batch_size, N, P^2•C]
 
@@ -111,7 +111,7 @@ class ViT(nn.Module):
 
         # Create the patch embedding
         x = self.patch_embedding(x)
-        print(x.shape)
+        #print(x.shape)
         
         # First expand the class token across the batch size
         class_token = self.class_token.expand(batch_size, -1, -1) # "-1" means infer the dimension
@@ -122,7 +122,7 @@ class ViT(nn.Module):
 
         # Add th positional embedding to patch embedding with class token
         x = self.positional_embedding + x
-        print(x.shape)
+        #print(x.shape)
 
         # dropout on patch + positional embedding
         x = self.embedding_dropout(x)
