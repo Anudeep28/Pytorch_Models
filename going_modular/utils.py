@@ -3,6 +3,8 @@ Contains various utility functions for PyTorch model training and saving.
 """
 import torch
 from pathlib import Path
+# Moving the downloaded images and the model to the respective repo
+import shutil
 
 def save_model(model: torch.nn.Module,
                target_dir: str,
@@ -33,3 +35,11 @@ def save_model(model: torch.nn.Module,
   print(f"[INFO] Saving model to: {model_save_path}")
   torch.save(obj=model.state_dict(),
              f=model_save_path)
+  
+
+# Moving the images
+def move_objects(source_file:Path,
+                 destination_dir:Path):
+    # source_file = custom_image_path
+    # destination_dir = foodvision_big_demo_path/"examples"
+    shutil.move(source_file, destination_dir)
